@@ -20,6 +20,161 @@ namespace FootballTournamentGenerator.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("FootballTournamentGenerator.Models.Team", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Drawn")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GoalDifference")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GoalsAgainst")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GoalsFor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Lost")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Point")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Won")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teams", (string)null);
+                });
+
+            modelBuilder.Entity("FootballTournamentGenerator.Models.TeamDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalDraws")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalLoses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalMatchesPlayed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalWins")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TournamentsParticipatedIn")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId")
+                        .IsUnique();
+
+                    b.ToTable("TeamDetails", (string)null);
+                });
+
+            modelBuilder.Entity("FootballTournamentGenerator.Models.Tournament", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tournaments", (string)null);
+                });
+
+            modelBuilder.Entity("FootballTournamentGenerator.Models.TournamentTeam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TournamentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
+
+                    b.HasIndex("TournamentId");
+
+                    b.ToTable("TournamentTeams", (string)null);
+                });
+
+            modelBuilder.Entity("FootballTournamentGenerator.Models.TeamDetail", b =>
+                {
+                    b.HasOne("FootballTournamentGenerator.Models.Team", "Team")
+                        .WithOne("TeamDetail")
+                        .HasForeignKey("FootballTournamentGenerator.Models.TeamDetail", "TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("FootballTournamentGenerator.Models.TournamentTeam", b =>
+                {
+                    b.HasOne("FootballTournamentGenerator.Models.Team", "Team")
+                        .WithMany("TournamentTeams")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FootballTournamentGenerator.Models.Tournament", "Tournament")
+                        .WithMany("TournamentTeams")
+                        .HasForeignKey("TournamentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Team");
+
+                    b.Navigation("Tournament");
+                });
+
+            modelBuilder.Entity("FootballTournamentGenerator.Models.Team", b =>
+                {
+                    b.Navigation("TeamDetail")
+                        .IsRequired();
+
+                    b.Navigation("TournamentTeams");
+                });
+
+            modelBuilder.Entity("FootballTournamentGenerator.Models.Tournament", b =>
+                {
+                    b.Navigation("TournamentTeams");
+                });
 #pragma warning restore 612, 618
         }
     }

@@ -16,6 +16,10 @@ namespace FootballTournamentGenerator.Models
         public int GoalDifference { get; set; }
         public int GoalsFor { get; set; }
         public int GoalsAgainst { get; set; }
+        public TeamDetail TeamDetail { get; set; }
+
+
+
 
         public List<TournamentTeam> TournamentTeams { get; set; }
 

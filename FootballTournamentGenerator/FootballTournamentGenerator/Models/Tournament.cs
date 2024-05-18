@@ -8,6 +8,7 @@ namespace FootballTournamentGenerator.Models
 
         [Required]
         public string Name { get; set; }
+        
 
         public List<TournamentTeam> TournamentTeams { get; set; }
 

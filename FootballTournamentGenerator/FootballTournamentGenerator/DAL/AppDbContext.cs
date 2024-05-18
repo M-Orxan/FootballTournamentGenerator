@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FootballTournamentGenerator.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FootballTournamentGenerator.DAL
 {
@@ -10,6 +11,10 @@ namespace FootballTournamentGenerator.DAL
             
         }
 
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<TournamentTeam> TournamentTeams { get; set; }
+        public DbSet<TeamDetail> TeamDetails { get; set; }
 
 
     }

@@ -1,4 +1,8 @@
-﻿
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"].ToString();
+    
+}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -298,22 +302,24 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
-                          
+                        <a class="nav-link @(currentController == "Dashboard" ? "active" : "")" asp-controller="Dashboard" asp-action="Index" aria-expanded="false" aria-controls="ui-basic">
+                            
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
+
+                    
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <a class="nav-link @(currentController == "Tournaments" ? "active" : "")" asp-controller="Tournaments" asp-action="Index">
                            
-                            <span class="menu-title">Tournaments</span>
+                            <span  class="menu-title">Tournaments</span>
                            
                         </a>
                     </li>
 
 
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <a class="nav-link @(currentController == "Teams" ? "active" : "")" asp-controller="Teams" asp-action="Index">
 
                             <span class="menu-title">Teams</span>
 
@@ -366,6 +372,7 @@
     <script src="~/js/dashboard.js"></script>
     <script src="~/js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
+    @RenderSection("Scripts",false)
 </body>
 
 </html>
