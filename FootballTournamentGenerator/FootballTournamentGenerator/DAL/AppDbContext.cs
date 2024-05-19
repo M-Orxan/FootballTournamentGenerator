@@ -15,6 +15,7 @@ namespace FootballTournamentGenerator.DAL
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<TournamentTeam> TournamentTeams { get; set; }
         public DbSet<TeamDetail> TeamDetails { get; set; }
+       
 
 
     }

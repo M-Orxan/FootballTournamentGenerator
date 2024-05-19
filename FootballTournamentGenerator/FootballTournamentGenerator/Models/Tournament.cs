@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FootballTournamentGenerator.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace FootballTournamentGenerator.Models
 {
@@ -8,9 +9,16 @@ namespace FootballTournamentGenerator.Models
 
         [Required]
         public string Name { get; set; }
-        
+        public int NumberOfParticipants { get; set; }
+
+      
+
 
         public List<TournamentTeam> TournamentTeams { get; set; }
+
+        [Required]
+
+        public TournamentFormat TournamentFormat { get; set; }
 
 
     }

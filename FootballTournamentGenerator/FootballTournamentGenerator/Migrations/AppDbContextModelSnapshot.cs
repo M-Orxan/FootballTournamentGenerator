@@ -56,7 +56,7 @@ namespace FootballTournamentGenerator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teams", (string)null);
+                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("FootballTournamentGenerator.Models.TeamDetail", b =>
@@ -90,7 +90,7 @@ namespace FootballTournamentGenerator.Migrations
                     b.HasIndex("TeamId")
                         .IsUnique();
 
-                    b.ToTable("TeamDetails", (string)null);
+                    b.ToTable("TeamDetails");
                 });
 
             modelBuilder.Entity("FootballTournamentGenerator.Models.Tournament", b =>
@@ -105,9 +105,15 @@ namespace FootballTournamentGenerator.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("NumberOfParticipants")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TournamentFormat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Tournaments", (string)null);
+                    b.ToTable("Tournaments");
                 });
 
             modelBuilder.Entity("FootballTournamentGenerator.Models.TournamentTeam", b =>
@@ -130,7 +136,7 @@ namespace FootballTournamentGenerator.Migrations
 
                     b.HasIndex("TournamentId");
 
-                    b.ToTable("TournamentTeams", (string)null);
+                    b.ToTable("TournamentTeams");
                 });
 
             modelBuilder.Entity("FootballTournamentGenerator.Models.TeamDetail", b =>
